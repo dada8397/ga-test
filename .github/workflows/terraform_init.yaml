@@ -1,0 +1,20 @@
+name: Terraform init
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  init:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - run: echo "BBB" > plan_aaa.out
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: plans_${{ github.event.number }}
+          path: plan_*.out
+          retention-days: 5
