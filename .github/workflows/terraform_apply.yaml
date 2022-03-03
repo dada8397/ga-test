@@ -18,4 +18,4 @@ jobs:
           workflow: terraform_init.yaml
           pr: ${{ github.event.issue.number }}
           name: plans_${{ github.event.issue.number }}
-      - run: ls -la
+      - run: cat plan_aaa.out
