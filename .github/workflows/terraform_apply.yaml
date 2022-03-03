@@ -6,6 +6,7 @@ on:
 
 jobs:
   apply:
+    runs-on: ubuntu-latest
     if: contains(github.event.comment.body, '/apply') && (github.actor == 'tru2dagame' || github.actor == 'dada8397')
     steps:
       - uses: actions/checkout@v2
