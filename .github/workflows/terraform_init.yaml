@@ -1,0 +1,23 @@
+name: Terraform init
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  init:
+    runs-on: self-hosted
+    env:
+      S3_BUCKET: ${{ secrets.S3_BUCKET }}
+      GITHUB_APP_PEM_FILE: ${{ secrets.PEM }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - run: touch plan_aaa.out
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: plans_${{ github.event.number }}
+          path: plan_*.out
+          retention-days: 5

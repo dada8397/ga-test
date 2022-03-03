@@ -1,0 +1,25 @@
+name: Terraform apply
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  apply:
+    runs-on: self-hosted
+    env:
+      COMMENT: ${{ github.event.comment.body }}
+      S3_BUCKET: ${{ secrets.S3_BUCKET }}
+      GITHUB_APP_PEM_FILE: ${{ secrets.PEM }}
+      ACTION_MEMBERS: ${{ secrets.ACTION_MEMBERS }}
+    if: contains(github.event.comment.body, '/apply') && (github.actor == 'tru2dagame' || github.actor == 'dada8397')
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Download artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          pr: ${{ github.event.issue.number }}
+          name: plans_${{ github.event.issue.number }}
+      - run: ls -la
