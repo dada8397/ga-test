@@ -15,6 +15,7 @@ jobs:
       - name: Download artifact
         uses: dawidd6/action-download-artifact@v2
         with:
+          workflow: terraform_init.taml
           pr: ${{ github.event.issue.number }}
           name: plans_${{ github.event.issue.number }}
       - run: ls -la
