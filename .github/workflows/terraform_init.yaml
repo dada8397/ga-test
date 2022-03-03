@@ -6,10 +6,6 @@ on:
 
 jobs:
   init:
-    runs-on: self-hosted
-    env:
-      S3_BUCKET: ${{ secrets.S3_BUCKET }}
-      GITHUB_APP_PEM_FILE: ${{ secrets.PEM }}
     steps:
       - uses: actions/checkout@v2
         with:

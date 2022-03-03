@@ -6,12 +6,6 @@ on:
 
 jobs:
   apply:
-    runs-on: self-hosted
-    env:
-      COMMENT: ${{ github.event.comment.body }}
-      S3_BUCKET: ${{ secrets.S3_BUCKET }}
-      GITHUB_APP_PEM_FILE: ${{ secrets.PEM }}
-      ACTION_MEMBERS: ${{ secrets.ACTION_MEMBERS }}
     if: contains(github.event.comment.body, '/apply') && (github.actor == 'tru2dagame' || github.actor == 'dada8397')
     steps:
       - uses: actions/checkout@v2
